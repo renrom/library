@@ -6,9 +6,6 @@ const newBook = document.querySelector(".btn-newbook");
 const cancelNewBook = document.querySelector(".cancel-newbook");
 const saveNewBook = document.querySelector(".save-newbook");
 
-const removeBook = document.querySelector(".btn-remove-book");
-
-
 
 newBook.addEventListener("click", () => {
   dialog.showModal();
@@ -23,16 +20,7 @@ saveNewBook.addEventListener("click", () => {
   dialog.close();
 });
 
-removeBook.addEventListener("click", () => {
-  alert("hello");
-
-});
-
-
-
 const myLibrary = [];
-
-
 
 function Book(title, author, pages, genre, read) {
   this.title = title;
@@ -66,10 +54,10 @@ function addBookToLibary() {
   document.getElementById("newbook-form").reset();
   console.log(myLibrary)
 
-
 }
 
-function addBookToPlacement() {
+
+function displayBook(indexnumber) {
 
   var bookItem = document.createElement("div");
   var bookTitle = document.createElement("div");
@@ -82,68 +70,75 @@ function addBookToPlacement() {
   var bookBtnRead = document.createElement("button");
 
 
-  for (let i = 0; i < myLibrary.length; i++) {
-    console.log(myLibrary[i].title);
+  bookTitle.appendChild(document.createTextNode(myLibrary[indexnumber].title));
+  bookTitle.className = "book-title";
 
-    bookTitle.appendChild(document.createTextNode(myLibrary[i].title));
-    bookTitle.className = "book-title";
+  bookAuthor.appendChild(document.createTextNode(myLibrary[indexnumber].author));
+  bookAuthor.className = "author";
 
-    bookAuthor.appendChild(document.createTextNode(myLibrary[i].author));
-    bookAuthor.className = "author";
+  bookPages.appendChild(document.createTextNode(myLibrary[indexnumber].pages));
+  bookPages.className = "pages";
 
-    bookPages.appendChild(document.createTextNode(myLibrary[i].pages));
-    bookPages.className = "pages";
+  bookGenre.appendChild(document.createTextNode(myLibrary[indexnumber].genre));
+  bookGenre.className = "genre";
 
-    bookGenre.appendChild(document.createTextNode(myLibrary[i].genre));
-    bookGenre.className = "genre";
+  bookRead.appendChild(document.createTextNode(myLibrary[indexnumber].read));
+  bookRead.className = "read";
 
-    bookRead.appendChild(document.createTextNode(myLibrary[i].read));
-    bookRead.className = "read";
+  bookItemButtons.className = "book-item-buttons";
+  bookBtnRemove.textContent = "Remove";
+  bookBtnRemove.className = "btn-remove-book";
 
-    bookItemButtons.className = "book-item-buttons";
-    bookBtnRemove.textContent = "Remove";
-    bookBtnRemove.className = "btn-remove-book";
+  bookBtnRead.textContent = "Read status";
+  bookBtnRead.className = "btn-readstatus";
 
+  bookItemButtons.appendChild(bookBtnRemove);
+  bookItemButtons.appendChild(bookBtnRead);
 
-    bookBtnRead.textContent = "Read status";
-    bookBtnRead.className = "btn-readstatus";
+  bookItem.className = "book-item";
+  bookItem.appendChild(bookTitle);
+  bookItem.appendChild(bookAuthor);
+  bookItem.appendChild(bookPages);
+  bookItem.appendChild(bookGenre);
+  bookItem.appendChild(bookRead);
+  bookItem.appendChild(bookItemButtons);
+  bookItem.setAttribute("data-index", indexnumber);
 
-    bookItemButtons.appendChild(bookBtnRemove);
-
-    bookItemButtons.appendChild(bookBtnRead);
-
-
-    bookItem.className = "book-item";
-    bookItem.appendChild(bookTitle);
-    bookItem.appendChild(bookAuthor);
-    bookItem.appendChild(bookPages);
-    bookItem.appendChild(bookGenre);
-    bookItem.appendChild(bookRead);
-    bookItem.appendChild(bookItemButtons);
-    bookItem.setAttribute("data-index", i);
+  document.querySelector(".book-placement").appendChild(bookItem);
 
 
+  bookBtnRemove.addEventListener("click", () => {
+    indexToRemove = bookItem.dataset.index;
+    myLibrary.splice(indexToRemove, 1);
 
-    document.querySelector(".book-placement").appendChild(bookItem);
-    bookBtnRemove.addEventListener("click", () => {
-      console.log(parent.getAttribute("index"));
-    });
 
-    bookBtnRead.addEventListener("click", () => {
-      alert("hello2");
-    });
+    const books = document.querySelector(".book-placement")
+    books.innerHTML = '';
 
+
+      for (let i = 0; i <= myLibrary.length; i++) {
+        displayBook(i)
+      }
 
 
 
 
 
-  }
+
+  });
 
 
+  bookBtnRead.addEventListener("click", () => {
 
+  });
+}
 
+function addBookToPlacement() {
+
+  lastBook = myLibrary.length - 1;
+  displayBook(lastBook);
 
 
 
 }
+
