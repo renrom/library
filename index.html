@@ -11,17 +11,16 @@
 
 <body>
 
+    <!------------------------------------->
+    <!-- Setup main screen               -->
+    <!------------------------------------->
 
     <div class="container">
-
         <div class="header">
             <p>Your So Overwhelming Library</p>
             <button class="btn-newbook">New Book</button>
         </div>
-
-
         <div class="bottom-wrapper">
-
             <div class="main-body">
                 <div class="book-placement">
                 </div>
@@ -30,16 +29,24 @@
 
     </div>
 
-    <dialog id="newbook-dialog">
+    <!------------------------------------->
+    <!-- Dialog form to add new books    -->
+    <!------------------------------------->
 
+    <!--------------------------------------------------------------------->
+    <!-- Allthough i tried to make the form action to 'get' (or 'post')  -->
+    <!-- and made the submit button, still i did not get a               -->
+    <!-- 'required warning with empy fields'                             -->
+    <!--------------------------------------------------------------------->
+
+    <dialog id="newbook-dialog">
         <form id="newbook-form">
             <h1>Add new book</h1>
             <div class="input-row">
                 <label for="booktitle">Title:</label>
-                <input type="text" id="booktitle" class="booktitle" name="booktitle" required placeholder="Title of the book" >
+                <input type="text" id="booktitle" class="booktitle" name="booktitle" required
+                    placeholder="Title of the book">
             </div>
-            <p id="errortitle"></p>
-            
             <div class="input-row">
                 <label for="author">Author:</label>
                 <input type="text" id="author" class="author" name="author" placeholder="Name of the writer" required>
@@ -59,7 +66,6 @@
                     <option value="Roman" class="">Roman</option>
                     <option value="Thriller" class="">Thriller</option>
                     <option value="Thriller" class="">Tragedy</option>
-
                 </select>
             </div>
             <div class="input-row">
@@ -68,12 +74,9 @@
             </div>
             <div class="btn-form">
                 <button class="cancel-newbook" type="button">Cancel</button>
-                <button class="save-newbook" type="button" >Save</button>
+                <button class="save-newbook" type="button">Save</button>
             </div>
-
         </form>
     </dialog>
-
 </body>
-
 </html>

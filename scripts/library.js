@@ -154,9 +154,6 @@ function addBookToPlacement() {
 
   lastBook = myLibrary.length - 1;
   displayBook(lastBook);
-
-
-
 }
 
 
