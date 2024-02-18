@@ -165,7 +165,6 @@ var book = new Book(
   false);
 
 myLibrary.push(book);
-
 addBookToPlacement();
 
 var book = new Book(
@@ -173,8 +172,17 @@ var book = new Book(
   "J. R. R. Tolkien",
   420,
   "Fantasy",
-  false);
+  true);
 
 myLibrary.push(book);
+addBookToPlacement();
 
+var book = new Book(
+  "IT",
+  "Stephen King",
+  1138,
+  "Horror",
+  true);
+
+myLibrary.push(book);
 addBookToPlacement();
