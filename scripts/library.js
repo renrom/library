@@ -44,7 +44,8 @@ function addBookToLibary() {
   var author = document.getElementById("author").value;
   var pages = document.getElementById("pages").value;
   var genre = document.getElementById("genre").value;
-  var read = document.getElementById("read").value;
+  var read = document.getElementById("read").checked;
+
   var book = new Book(title, author, pages, genre, read, book);
 
   myLibrary.push(book);
@@ -52,7 +53,6 @@ function addBookToLibary() {
   addBookToPlacement();
 
   document.getElementById("newbook-form").reset();
-  console.log(myLibrary)
 
 }
 
@@ -70,20 +70,34 @@ function displayBook(indexnumber) {
   var bookBtnRead = document.createElement("button");
 
 
-  bookTitle.appendChild(document.createTextNode(myLibrary[indexnumber].title));
+  bookTitle.appendChild(document.createTextNode("Title: " + myLibrary[indexnumber].title));
   bookTitle.className = "book-title";
 
-  bookAuthor.appendChild(document.createTextNode(myLibrary[indexnumber].author));
+  bookAuthor.appendChild(document.createTextNode("Author: " + myLibrary[indexnumber].author));
   bookAuthor.className = "author";
 
-  bookPages.appendChild(document.createTextNode(myLibrary[indexnumber].pages));
+  bookPages.appendChild(document.createTextNode("# of Pages: " + myLibrary[indexnumber].pages));
   bookPages.className = "pages";
 
-  bookGenre.appendChild(document.createTextNode(myLibrary[indexnumber].genre));
+  bookGenre.appendChild(document.createTextNode("Genre: " + myLibrary[indexnumber].genre));
   bookGenre.className = "genre";
 
-  bookRead.appendChild(document.createTextNode(myLibrary[indexnumber].read));
-  bookRead.className = "read";
+
+
+  if (myLibrary[indexnumber].read) { 
+
+    bookRead.appendChild(document.createTextNode("Read"));
+    bookRead.className = "book-isread";
+  } else {
+    bookRead.appendChild(document.createTextNode("Not read yet"));
+    bookRead.className = "book-isnotread";
+
+  };
+
+
+
+  //bookRead.appendChild(document.createTextNode("Read: "+myLibrary[indexnumber].read));
+  //bookRead.className = "read";
 
   bookItemButtons.className = "book-item-buttons";
   bookBtnRemove.textContent = "Remove";
@@ -111,25 +125,28 @@ function displayBook(indexnumber) {
     indexToRemove = bookItem.dataset.index;
     myLibrary.splice(indexToRemove, 1);
 
-
     const books = document.querySelector(".book-placement")
     books.innerHTML = '';
 
-
-      for (let i = 0; i <= myLibrary.length; i++) {
-        displayBook(i)
-      }
-
-
-
-
-
-
+    for (let i = 0; i <= myLibrary.length; i++) {
+      displayBook(i)
+    }
   });
 
-
   bookBtnRead.addEventListener("click", () => {
+    indexToUpdateReadStatus = bookItem.dataset.index;
+    
+    if (myLibrary[indexToUpdateReadStatus].read) {
+      myLibrary[indexToUpdateReadStatus].read = false;
+    } else {
+      myLibrary[indexToUpdateReadStatus].read = true;
+    }
+    const books = document.querySelector(".book-placement")
+    books.innerHTML = '';
 
+    for (let i = 0; i <= myLibrary.length; i++) {
+      displayBook(i)
+    }
   });
 }
 
@@ -142,3 +159,25 @@ function addBookToPlacement() {
 
 }
 
+
+var book = new Book(
+  "One Flew Over the Cuckoo's Nest",
+  "Ken Kesey",
+  320,
+  "Tragedy",
+  false);
+
+myLibrary.push(book);
+
+addBookToPlacement();
+
+var book = new Book(
+  "The Lord of the Rings",
+  "J. R. R. Tolkien",
+  420,
+  "Fantasy",
+  false);
+
+myLibrary.push(book);
+
+addBookToPlacement();

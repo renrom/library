@@ -16,15 +16,12 @@
 
         <div class="header">
             <p>Your So Overwhelming Library</p>
+            <button class="btn-newbook">New Book</button>
         </div>
 
 
         <div class="bottom-wrapper">
 
-            <div class="sidebar">
-
-                <button class="btn-newbook">New Book</button>
-            </div>
             <div class="main-body">
                 <div class="book-placement">
                 </div>
@@ -36,27 +33,33 @@
     <dialog id="newbook-dialog">
 
         <form id="newbook-form">
+            <h1>Add new book</h1>
             <div class="input-row">
                 <label for="booktitle">Title:</label>
-                <input type="text" id="booktitle" class="booktitle" name="booktitle" placeholder="Title of the book">
+                <input type="text" id="booktitle" class="booktitle" name="booktitle" required placeholder="Title of the book" >
             </div>
+            <p id="errortitle"></p>
+            
             <div class="input-row">
                 <label for="author">Author:</label>
-                <input type="text" id="author" class="author" name="author" placeholder="Name of the writer">
+                <input type="text" id="author" class="author" name="author" placeholder="Name of the writer" required>
             </div>
             <div class="input-row">
                 <label for="pages">Number of pages:</label>
-                <input type="number" id="pages" class="pages" name="pages" placeholder="Name of the pages">
+                <input type="number" id="pages" class="pages" name="pages" placeholder="Name of the pages" required>
             </div>
             <div class="input-row">
                 <label for="genre" class="">Genre: </label>
                 <select name="genre" id="genre">
                     <option value="Comic" class="">Comic</option>
                     <option value="Drama" class="">Drama</option>
+                    <option value="Drama" class="">Fantasy</option>
                     <option value="History" class="">History</option>
                     <option value="Horror" class="">Horror</option>
                     <option value="Roman" class="">Roman</option>
                     <option value="Thriller" class="">Thriller</option>
+                    <option value="Thriller" class="">Tragedy</option>
+
                 </select>
             </div>
             <div class="input-row">
@@ -65,7 +68,7 @@
             </div>
             <div class="btn-form">
                 <button class="cancel-newbook" type="button">Cancel</button>
-                <button class="save-newbook" type="button">Save</button>
+                <button class="save-newbook" type="button" >Save</button>
             </div>
 
         </form>
